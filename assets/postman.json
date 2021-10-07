@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "2aafe955-a126-4306-8e18-f6eb34e5323f",
+		"name": "binary-training",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"{{mobileNumber}}\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/transactions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"transactions"
+					]
+				},
+				"description": "This API creates a new transaction document with user mobile number. Once the transaction doc is created, further transactions can be done with the same mobile number as authorization header."
+			},
+			"response": []
+		},
+		{
+			"name": "Credit Amount",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{mobileNumber}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"150000\",\n    \"title\": \"food refund\"\n    \n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/credit",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"credit"
+					]
+				},
+				"description": "This endpoint can be used to credit amount.\nSend registered mobile number as authorization header.\n\n{\n    \"amount\": \"15000\",\n    \"title\": \"food refund\"\n    \n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Debit Amount",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{mobileNumber}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"50\",\n    \"title\": \"DTH Recharge\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/debit",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"debit"
+					]
+				},
+				"description": "This endpoint can be used to debit amount.\nSend registered mobile number as authorization header.\n\nIf debit is more than available balance, an error message is received with insufficient balance as message.\n\n{\n    \"amount\": \"50\",\n    \"title\": \"DTH Recharge\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Balance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{mobileNumber}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/balance",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"balance"
+					]
+				},
+				"description": "This end point returns total balance of a user transaction. Send registered mobile number as authorization header.\n\n\nResponse: \n\n{\n    \"balance\": 5003000\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transactions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{mobileNumber}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/transactions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"transactions"
+					]
+				},
+				"description": "This end point returns an array of transactions of a user transaction. Send registered mobile number as authorization header.\n\n\nSample Response: \n\n\"transactions\": [\n        {\n            \"amount\": 14950,\n            \"transactionAmount\": 50,\n            \"type\": \"debit\",\n            \"title\": \"DTH Recharge\",\n            \"time\": \"2021-09-07T10:47:01.998Z\",\n            \"_id\": \"61374326916f61a4db66f80e\"\n        },\n        {\n            \"amount\": 15000,\n            \"transactionAmount\": 15000,\n            \"type\": \"credit\",\n            \"title\": \"food refund\",\n            \"time\": \"2021-09-07T10:46:52.223Z\",\n            \"_id\": \"6137431c916f61a4db66f80a\"\n        }\n    ]\n}"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:7000"
+		}
+	]
+}
