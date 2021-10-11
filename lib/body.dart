@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'AccountDetails/accountDetails.dart';
+import 'package:http/http.dart' as http;
+
+
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
+
+  //final GlobalKey<FromState> _formKey= GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +36,16 @@ class Body extends StatelessWidget {
 
                     Container(
                       width: 250.0,
-                      child: TextField(
+                      child: TextFormField(
 
                         decoration: InputDecoration(
                           hintText: "Enter your phone-number",
                           labelText: "phone-number",
+
                         ),
                         keyboardType: TextInputType.number ,
                         maxLength: 10,
+
                       ),
                     ),
                   ]
@@ -52,9 +59,9 @@ class Body extends StatelessWidget {
                 onPressed: ()
                 {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AccountDetails()
-                    )
+                      MaterialPageRoute(
+                          builder: (context) => AccountDetails()
+                      )
                   );
 
                 },

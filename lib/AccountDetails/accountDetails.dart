@@ -2,6 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/AccountDetails/appBar.dart';
+import 'creditDebit.dart';
+import 'transaction/totalBalance.dart';
 
 class getListViewClass extends StatelessWidget {
   const getListViewClass({Key? key}) : super(key: key);
@@ -63,14 +65,14 @@ class AccountDetails extends StatelessWidget {
             height: 80,
             width: 400,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.red[100],
-              border: Border.all(
-                color: Colors.red
-              )
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.red[100],
+                border: Border.all(
+                    color: Colors.red
+                )
             ),
 
-            child: Text("Total Balance: "),
+            child: Text("Total Balance:   "),
           ),
 
           Container(
@@ -91,6 +93,8 @@ class AccountDetails extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: (){
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CreditDebit()));
 
         },
         child: Icon(
